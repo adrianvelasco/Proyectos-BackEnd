@@ -1,0 +1,89 @@
+Entrar a postgres desde la terminal
+Paso 1:
+sudo -i -u postgres
+paso 2:
+psql
+paso 3 Ver la lista de base de datos:
+\list
+paso 4 conectar ala base de datos:
+\c Name_database
+paso 5:
+\dt => Listado de realaciones
+import { createServer } from "http";
+import { execute, subscribe } from "graphql";
+import { SubscriptionServer } from "subscriptions-transport-ws";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import resolvers from "./resolvers";
+import typeDefs from "./typeDefs";
+
+(async function () {
+  const app = express();
+
+  const httpServer = createServer(app);
+
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
+
+  const subscriptionServer = SubscriptionServer.create({
+    schema,
+    execute,
+    subscribe,
+    onConnect() {
+      // lookup userId by token, etc.
+      return { userId };
+    },
+  }, {
+    server: httpServer,
+    path: server.graphqlPath,
+  });
+
+  const server = new ApolloServer({
+    schema,
+    context() {
+      // lookup userId by token, etc.
+      return { userId };
+    },
+    plugins: [{
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            subscriptionServer.close();
+          }
+        };
+      }
+    }],
+  });
+  await server.start();
+  server.applyMiddleware({ app });
+
+  const PORT = 4000;
+  httpServer.listen(PORT, () =>
+    console.log(`Server is now running on http://localhost:${PORT}/graphql`)
+  );
+})();
+
+const { ApolloServer } = require('apollo-server');
+const { execute, subscribe } = require('graphql'); 
+const schema = require('./controllers');
+
+const server = new ApolloServer({ 
+  schema, 
+  execute,
+  subscribe,
+});
+
+
+server.listen(normalizePort('7011'));
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+  if (isNaN(port)) return val;
+  if (port >= 0) return port;
+  return false;
+}
+
+--Create React APP
+npx create-react-app@latest  front-museemin --use-npm

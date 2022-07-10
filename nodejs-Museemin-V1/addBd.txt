@@ -1,0 +1,43 @@
+------------------21/02/22---ADRIAN VELASCO CURIEL ------
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Tabla Roca',now(),now());
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Plomeria',now(),now());
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Electricidad',now(),now());
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Albañileria',now(),now());
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Soldadura',now(),now());
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Carpinteria',now(),now());
+INSERT INTO "Clasifications" ("name","createdAt","updatedAt")  VALUES  ('Pintura',now(),now());
+----------------------------------------------------------
+
+INSERT INTO "Tools" ("name", "description", "tradeMark", estatus, "createdAt", "updatedAt", "clasificationId")
+	VALUES ('Careta', 'Color Negro', 'desconocida', 'nueva', now(), now(), 5);
+  INSERT INTO "Tools" ("name", "description", "tradeMark", estatus, "createdAt", "updatedAt", "clasificationId")
+	VALUES ('Careta', 'Color Azul', 'desconocida', 'nueva', now(), now(), 5);
+  
+
+Prestamos (
+	id
+	id_trabador
+	id_prestamista
+	id_tool
+	id_toolPack nulo
+	fcecha_salida
+	fecha_entrega
+	estatus
+)
+
+proveedores (
+	id
+	nombre
+	marca
+	correo
+	telfono
+	id_tool
+)
+
+compras (
+	id_compra
+	id_proveedor
+	id_tool
+	cantidad
+	total
+)
